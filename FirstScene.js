@@ -22,8 +22,10 @@ export default class MainScene extends Component {
   render() {
     return (
       <ViroScene style={styles.container}>
+        <Viro360Image source={require('./res/dark_theatre.jpg')} />
+
         <ViroVideo
-          source={require("./res/vr-1.mp4")}
+          source={require("./res/vr-2.mp4")}
           volume={1.0}
           loop={true}
           stereoMode={'leftRight'}
