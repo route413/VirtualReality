@@ -56,18 +56,7 @@ export default class MainScene extends Component {
             position={[0, 0, -1]}
             scale={[2, 2, 2]}
             stereoMode={'leftRight'}
-          />
-
-          <ViroText
-            fontSize={40}
-            text="Hello There"
-            width={2}
-            height={2}
-            position={[0, 0, 1]}
-            textAlign="center"
-            textAlignVertical="center"
-            color="#ffffff"
-          />
+          />          
         </ViroNode>
       </ViroScene>
     );
