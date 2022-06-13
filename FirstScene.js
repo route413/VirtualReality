@@ -7,29 +7,68 @@ import {
   ViroARScene,
   Viro360Image,
   ViroImage,
+  ViroSphere,
+  ViroARPlane,
+  ViroBox,
   ViroAnimations,
   ViroVideo,
   ViroNode,
   ViroText
 } from '@viro-community/react-viro';
 
+let video = require("./res/vr-2.mp4");
+
 export default class MainScene extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  vrScene() {
+    return (
+      <ViroScene>
+        <ViroText
+          fontSize={40}
+          text="Hello There"
+          width={2}
+          height={2}
+          position={[0, 0, -1]}
+          textAlign="center"
+          textAlignVertical="center"
+          color="#ffffff"
+        />
+      </ViroScene>
+    )
   }
 
   // VR SECTION
   render() {
+
+    //return this.vrScene()
+
     return (
       <ViroScene style={styles.container}>
-        <Viro360Image source={require('./res/dark_theatre.jpg')} />
+        <ViroNode>
+          <ViroVideo
+            source={video}
+            volume={1.0}
+            loop={true}
+            position={[0, 0, -1]}
+            scale={[2, 2, 2]}
+            stereoMode={'leftRight'}
+          />
 
-        {/* <ViroVideo
-          source={require("./res/vr-2.mp4")}
-          volume={1.0}
-          loop={true}
-          stereoMode={'leftRight'}
-        /> */}
+          <ViroText
+            fontSize={40}
+            text="Hello There"
+            width={2}
+            height={2}
+            position={[0, 0, 1]}
+            textAlign="center"
+            textAlignVertical="center"
+            color="#ffffff"
+          />
+        </ViroNode>
       </ViroScene>
     );
   }
@@ -53,19 +92,23 @@ export default class MainScene extends Component {
 }
 
 var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'orange'
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'orange'
+  },
 });
 
 /**
  * Declare all your animations here. They'll be referenced by the animation props.
  */
 ViroAnimations.registerAnimations({
-    showTitleAnimation: { properties:{scaleX:2, scaleY:2, scaleZ:2, opacity:1.0 }, easing: "PowerDecel", duration: 1000 },
+  showTitleAnimation: {
+    properties: {scaleX: 2, scaleY: 2, scaleZ: 2, opacity: 1.0},
+    easing: "PowerDecel",
+    duration: 1000
+  },
 });
 
 module.exports = MainScene;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
 import {
   ViroTrackingStateConstants,
   ViroVRSceneNavigator,
@@ -14,9 +14,9 @@ var vrScenes = {
 }
 
 // VR SECTION
-export default () => {
-  return (
-    <ViroVRSceneNavigator
+export default (props) => {
+  return (<ViroVRSceneNavigator
+      {...props}
       initialScene={{
         scene: require('./FirstScene'),
       }}

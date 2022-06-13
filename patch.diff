@@ -1,0 +1,200 @@
+From b2997f9aa1b742467f007a3cbd47b1778c66befc Mon Sep 17 00:00:00 2001
+From: Ho Kai Yip <ho.kai.yip@fullstackers.com>
+Date: Fri, 10 Jun 2022 13:20:25 -0400
+Subject: [PATCH] wip
+
+---
+ App.js          | 10 ++++----
+ FirstScene.js   | 68 +++++++++++++++++++++++++++++++++++++------------
+ metro.config.js | 40 ++++++++++++++---------------
+ 3 files changed, 77 insertions(+), 41 deletions(-)
+
+diff --git a/App.js b/App.js
+index 6714881..b3f0499 100644
+--- a/App.js
++++ b/App.js
+@@ -1,5 +1,5 @@
+-import React, { useState } from 'react';
+-import { StyleSheet } from 'react-native';
++import React, {useState} from 'react';
++import {StyleSheet} from 'react-native';
+ import {
+   ViroTrackingStateConstants,
+   ViroVRSceneNavigator,
+@@ -14,9 +14,9 @@ var vrScenes = {
+ }
+ 
+ // VR SECTION
+-export default () => {
+-  return (
+-    <ViroVRSceneNavigator
++export default (props) => {
++  return (<ViroVRSceneNavigator
++      {...props}
+       initialScene={{
+         scene: require('./FirstScene'),
+       }}
+diff --git a/FirstScene.js b/FirstScene.js
+index 6811907..610944e 100644
+--- a/FirstScene.js
++++ b/FirstScene.js
+@@ -1,33 +1,65 @@
+ 'use strict';
+ 
+-import React, { Component } from 'react';
++import React, {Component} from 'react';
+ import {StyleSheet} from 'react-native';
+ import {
+   ViroScene,
+   ViroARScene,
+   Viro360Image,
+   ViroImage,
++  ViroSphere,
++  ViroARPlane,
++  ViroBox,
+   ViroAnimations,
+   ViroVideo,
+   ViroNode,
+   ViroText
+ } from '@viro-community/react-viro';
+ 
++let video = require("./res/vr-2.mp4");
++
+ export default class MainScene extends Component {
+-  constructor() {
+-    super();
++
++  constructor(props) {
++    super(props);
++    this.state = {}
+   }
+ 
++  vrScene() {
++    return (
++      <ViroScene>
++        <ViroText
++          fontSize={40}
++          text="Hello There"
++          width={2}
++          height={2}
++          position={[0, 0, -1]}
++          textAlign="center"
++          textAlignVertical="center"
++          color="#ffffff"
++        />
++      </ViroScene>
++    )
++  }
++
++
+   // VR SECTION
+   render() {
++
++    //return this.vrScene()
++
+     return (
+       <ViroScene style={styles.container}>
+-        <ViroVideo
+-          source={require("./res/vr-1.mp4")}
+-          volume={1.0}
+-          loop={true}
+-          stereoMode={'leftRight'}
+-        />
++        <ViroNode>
++          <ViroVideo
++            source={video}
++            volume={1.0}
++            loop={true}
++            position={[0, 0, -1]}
++            scale={[2, 2, 2]}
++            stereoMode={'leftRight'}
++          />
++        </ViroNode>
+       </ViroScene>
+     );
+   }
+@@ -51,19 +83,23 @@ export default class MainScene extends Component {
+ }
+ 
+ var styles = StyleSheet.create({
+-    container: {
+-        flex: 1,
+-        justifyContent: 'center',
+-        alignItems: 'center',
+-        backgroundColor: 'orange'
+-    },
++  container: {
++    flex: 1,
++    justifyContent: 'center',
++    alignItems: 'center',
++    backgroundColor: 'orange'
++  },
+ });
+ 
+ /**
+  * Declare all your animations here. They'll be referenced by the animation props.
+  */
+ ViroAnimations.registerAnimations({
+-    showTitleAnimation: { properties:{scaleX:2, scaleY:2, scaleZ:2, opacity:1.0 }, easing: "PowerDecel", duration: 1000 },
++  showTitleAnimation: {
++    properties: {scaleX: 2, scaleY: 2, scaleZ: 2, opacity: 1.0},
++    easing: "PowerDecel",
++    duration: 1000
++  },
+ });
+ 
+ module.exports = MainScene;
+diff --git a/metro.config.js b/metro.config.js
+index 73ef3b6..ca08e62 100644
+--- a/metro.config.js
++++ b/metro.config.js
+@@ -5,25 +5,25 @@
+  * @format
+  */
+ 
+- const { getDefaultConfig } = require("metro-config");
++const {getDefaultConfig} = require("metro-config");
+ 
+- module.exports = (async () => {
+-   const {
+-     resolver: { assetExts }
+-   } = await getDefaultConfig();
+- 
+-   return {
+-     transformer: {
+-       getTransformOptions: async () => ({
+-         transform: {
+-           experimentalImportSupport: false,
+-           inlineRequires: true,
+-         },
+-       }),
+-     },
+-     resolver: {
+-       assetExts: [...assetExts, "obj", "mtl", "JPG", "vrx", "hdr", "gltf", "glb", "bin", "arobject", "gif"]
+-     }
+-   }
+- })();
++module.exports = (async () => {
++  const {
++    resolver: {assetExts}
++  } = await getDefaultConfig();
++
++  return {
++    transformer: {
++      getTransformOptions: async () => ({
++        transform: {
++          experimentalImportSupport: false,
++          inlineRequires: true,
++        },
++      }),
++    },
++    resolver: {
++      assetExts: [...assetExts, "obj", "mtl", "JPG", "vrx", "hdr", "gltf", "glb", "bin", "arobject", "gif", "mp4"]
++    }
++  }
++})();
+  
+\ No newline at end of file
+-- 
+2.32.1 (Apple Git-133)
+
