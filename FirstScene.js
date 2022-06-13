@@ -24,12 +24,12 @@ export default class MainScene extends Component {
       <ViroScene style={styles.container}>
         <Viro360Image source={require('./res/dark_theatre.jpg')} />
 
-        <ViroVideo
+        {/* <ViroVideo
           source={require("./res/vr-2.mp4")}
           volume={1.0}
           loop={true}
           stereoMode={'leftRight'}
-        />
+        /> */}
       </ViroScene>
     );
   }
