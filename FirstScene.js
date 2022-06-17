@@ -18,7 +18,7 @@ import {
 
 let video = require("./res/vr-2.mp4");
 
-export default class MainScene extends Component {
+export default class FirstScene extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -56,7 +56,7 @@ export default class MainScene extends Component {
             position={[0, 0, -1]}
             scale={[2, 2, 2]}
             stereoMode={'leftRight'}
-          />          
+          />
         </ViroNode>
       </ViroScene>
     );
@@ -100,4 +100,4 @@ ViroAnimations.registerAnimations({
   },
 });
 
-module.exports = MainScene;
+module.exports = FirstScene;
