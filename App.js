@@ -15,7 +15,8 @@ var vrScenes = {
 
 // VR SECTION
 export default (props) => {
-  return (<ViroVRSceneNavigator
+  return (
+    <ViroVRSceneNavigator
       {...props}
       initialScene={{
         scene: require('./FirstScene'),
